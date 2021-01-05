@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- 
+    随着点击按钮实现自增或自减 
+    时间监听中的点击事件：v-on:click或者@click
+
+-->
+<body>
+
+    <div id="dh">
+        <h2>current number : {{counter}}</h2>
+        <!-- 如果方法调用的时候不进行参数传递,就可以省略() -->
+        <button @click = 'increment'>+</button>
+        <button @click = 'decrement'>-</button>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#dh',
+            data:{
+                counter: 0
+            },
+            methods:{
+                increment() {
+                    this.counter++
+                },
+                decrement() {
+                    this.counter--
+                }
+            }
+        })
+    </script>
+</body>
+</html>

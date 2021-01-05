@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 1、.stop修饰符：停止冒泡 -->
+    <!-- 冒泡：点击button时，div也执行了事件。.stop就是要阻止事件冒泡 -->
+    <div id="app" @click='divClick' style="width: 150px;background: red;">
+        <button @click.stop='btnClick'>按钮</button>
+        <br>
+        <!-- 2、.prevent:阻止默认事件 -->
+        <!-- from表单中submit自动提交事件，.prevent可以阻止 -->
+        <form>
+            <input type="submit" value="提交" @click.prevent.stop='manualCommit'>
+        </form>
+        <!-- 3、.once:单次回调 -->
+        <button @click.once.stop='btnClick'>button</button>
+    </div>  
+    
+    <script src="../js/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            methods:{
+                divClick(){
+                    console.log("div");
+                    
+                },
+                btnClick(){
+                    console.log("button");
+                    
+                },
+                manualCommit(){
+                    console.log("manual commit！");
+                    
+                }
+            }
+        })
+    </script>
+</body>
+</html>

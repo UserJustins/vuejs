@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 上一个案例中，因为虚拟DOM的原因,两个毫不相干的input在切换的时候输入框值却还在 -->
+    <div id="app">
+        <!-- 使用属性key就可以解决 -->
+        <span v-if='show'>
+            <label for="username">用户登录</label>
+            <input type="text" id="username" placeholder="用户名" key='username'>
+        </span>
+        <span v-else>
+            <label for="mail">邮箱登录</label>
+            <input type="text" id="mail" placeholder="邮箱地址" key='mail'>
+        </span>
+
+        <button @click="show = !show">切换</button>
+    </div>
+
+
+    <script src="../js/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                show: true
+            }
+        })
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>购物车小案列</title>
+</head>
+<body>
+    <div id="app">
+        <div v-if="totalPrice">
+           <table border="1">
+               <thead>
+               <th>id</th>
+               <th>书名</th>
+               <th>单价</th>
+               <th>数量</th>
+               <th>操作</th>
+               </thead>
+               <tbody>
+               <tr v-for="(book,index) in books">
+                   <td>{{book.id}}</td>
+                   <td>{{book.name}}</td>
+                   <!-- 过滤器的简单使用 -->
+                   <td>{{book.price | formatPrice}}</td>
+                   <td>
+                       <button @click="decrement(index)" :disabled="book.number < 2">-</button>
+                       {{book.number}}
+                       <button @click="increment(index)">+</button>
+                   </td>
+                   <td><button @click="removeBook(index)">移除</button></td>
+               </tr>
+               </tbody>
+           </table>
+            <span>总价格:{{totalPrice | formatPrice}}</span>
+        </div>
+        <span v-else>购物车空空乳液</span>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                books:[
+                    {
+                        id: 0,
+                        name: 'AAA',
+                        number:1,
+                        price: 11.00
+                    },
+                    {
+                        id: 1,
+                        name: 'BBB',
+                        number:1,
+                        price: 12.00
+                    },
+                    {
+                        id: 2,
+                        name: 'CCC',
+                        number:1,
+                        price: 13.00
+                    },
+                    {
+                        id: 3,
+                        name: 'EEE',
+                        number:1,
+                        price: 14.00
+                    },
+                    {
+                        id: 4,
+                        name: 'FFF',
+                        number:1,
+                        price: 15.00
+                    }
+                ]
+            },
+            filters:{
+                formatPrice(price){
+                   // toFixed(2):保留小数点后两位
+                   return '￥'+ price.toFixed(2)
+                }
+            },
+            methods:{
+                increment(index){
+                   this.books[index].number ++
+                },
+                decrement(index){
+                    this.books[index].number --
+                },
+                removeBook(index){
+                    //splice(index,1)删除数组中对应下标元素
+                    this.books.splice(index,1)
+                },
+                // isActive(index){
+                //     return this.books[index].number < 2
+                // }
+            },
+            computed:{
+                totalPrice(){
+                    //let total = 0;
+                    // 1、传统的遍历方式
+                    // for(let i = 0; i<this.books.length; i++){
+
+                    //     total += (this.books[i].number) * (this.books[i].price);
+                    // }
+
+                    // 2、for(let i in this books) 还是普通的使用下标而已
+                    // for(let i in this.books){
+                    //     total += (this.books[i].number) * (this.books[i].price);
+                    // }
+
+                    // 3、for(let book of this.books) 遍历出来的是对象book
+                    // for(let book of this.books){
+                    //     total += book.number * book.price    
+                    // }
+
+                    //4、高阶函数reduce
+                    return this.books.reduce(function(preValue,book){
+                        return preValue + book.number * book.price
+                    },0)
+                    //return total;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- 
+    事件监听方法调用的时候传参问题
+    1、当方法没有任何形参，那么方法调用时可以将（）省略
+    2、当方法只定义了一个形参，但方法调用时不传递参数,那么形参默认
+    接受的是浏览器创建出来的event对象；
+    3、当实参的个数小于形参时，形参将依次赋值；剩余形参为undefined
+    4、当实参的个数大于形参时，那么多余的实参将不会被接受；
+    5、实参传递event对象，$event
+-->
+<body>
+
+    <div id="app">
+        <!-- 方法不需要传递参数 -->
+        <button @click='btn1Click'>按钮1</button>
+        <!-- 方法定义了一个形参,如果不传递实参-->
+        <!-- 形参将是一个MouseEvent对象 -->
+        <button @click='btn2Click'>按钮2</button>
+        <button @click="btn2Click('Hello')">按钮2</button>
+        <button @click="btn3Click('Hello')">按钮3</button>
+        <button @click="btn3Click('Hello','Hello','Hello','Hello','Hello')">按钮3</button>
+        <button @click="btn4Click('Hello',$event)">按钮4</button>
+    </div>
+
+
+    <script src="../js/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el:"#app",
+            methods:{
+                btn1Click() {
+                    console.log('按钮1被点击了');
+                },
+                btn2Click(name) {
+                    console.log(name)
+                },
+                btn3Click(arg1,arg2,arg3) {
+                    console.log(arg1);
+                    console.log(arg2);
+                    console.log(arg3);
+                    
+                },
+                btn4Click(arg1,arg2){
+                    console.log('参数一的值：'+arg1);
+                    console.log('参数一的值：实参传递过来的是一个event对象'+arg2);
+                    
+                }
+
+            }
+
+        })
+
+    </script>
+</body>
+</html>
