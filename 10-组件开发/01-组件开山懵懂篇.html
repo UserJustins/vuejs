@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>预习篇、哪有什么创建、注册、使用这么麻烦,重点就是一个注册</h1>
+    <!-- 一、全局组件的创建、注册是使用
+        1、 Vue.extend() 创建组件
+        2、 Vue.component('自定义组件在html中的标签名','组件实例') 注册组件
+        3、在组件的作用域中直接使用标签即可
+
+        二、编写过程中的错误
+        1、组件实例的创建需要在Vue实例创建之前
+            自己肤浅的猜想一下：如果先创建Vue实例,必然要初始化和渲染el,渲染之时浏览器
+            还不知道<my_span>是个啥。
+        2、组件的complate需要一个根元素包裹起来，否则提示
+        Component template should contain exactly one root element
+    -->
+
+    <div id="element">
+        <!-- 使用全局组件com -->
+        <my_span></my_span>
+    </div>
+
+    <!-- 辣鸡，不是全局组件嘛，为什么不显示？莫非这个全局指的就是Vue实例？
+    带着这个问题翻看了官方文档才恍然大悟，这个页面的东西就当是预习了 -->
+    <my_span></my_span>
+    
+    <script src="../vuejs/vue.js"></script>
+    <script>
+        
+        // 创建一个全局的组件
+        // Component template should contain exactly one root element
+        const com = Vue.extend({
+            template: `<div><span>中国功夫好呀</span>
+                       <p>黑金古刀</p></div>
+                       `
+        })
+        //注册组件
+        Vue.component('my_span',com)
+
+        new Vue({
+            el: '#element'
+        })
+
+
+       
+    </script>
+</body>
+</html>

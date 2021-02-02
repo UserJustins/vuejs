@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .active{
+            color: red;
+        }
+    </style>
+</head>
+<!-- 列表中展示的第一列默认颜色为红色;点击谁谁为红色 -->
+<body>
+    <div id="app">
+        <ul>
+        <!-- class属性值动态的绑定 
+            1、我可以想到v-for去遍历它
+            2、也可以做到class属性值的动态绑定
+            我该怎么才能让其切换自如呢？并且默认做到默认第一列显示red?到这里思路就断了
+            
+            
+            isActive和index挂上勾就可以了
+        -->
+            <li v-for="item in arrays" 
+                :class='{active:isActive}'
+                @click='right'>
+                {{item}}
+            </li>
+        </ul>
+    </div>
+    <script src="../vuejs/vue.js"></script>
+    <script>
+
+        new Vue({
+            el: '#app',
+            data:{
+                arrays: ['A','B','C','D','E','F'],
+                isActive: true
+            },
+            methods:{
+                right(){
+                    
+                }
+            }
+        })
+    </script>
+</body>
+</html>

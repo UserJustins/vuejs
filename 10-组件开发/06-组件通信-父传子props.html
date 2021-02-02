@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 父传子的业务场景：
+        页面在初始化的时候大的组件将页面的所需的数据都请求过来，在传给各个需要的子组件
+    -->
+</head>
+<body>
+
+    <!-- 注意：动态的只绑定不支持驼峰命名
+
+        1、定义一个组件
+        2、组件在Vue实例中进行局部注册
+        3、使用组件的props定义一个属性用来和父组件的属性值进行绑定
+            props:{
+                //属性名：属性值类型
+                name:String
+            }
+            要我说这就java中方法的形参
+        4、动态绑定传值(当然也可以是静态的)    
+            v-bind:子组件中定义的属性名='传入父组件的属性值'
+
+        更多的细节问题可以参考官方文档   
+     -->
+    <div id="content">
+        <h1>{{name}}</h1>
+        <my-component :name='this.name'></my-component>
+    </div>
+
+    <template id="component-template">
+        <div>
+            <span>我是一个组件,父组件传给我的名字是：{{name}}</span>
+        </div>
+    </template>
+
+    <script src="../vuejs/vue.js"></script>
+    <script>
+
+        var component = {
+            template: '#component-template',
+            data(){
+                return {
+                    count:0
+                }
+            },
+            props:{
+                //子name
+                name:String
+            }
+
+        }
+
+
+        new Vue({
+            el: '#content',
+            data:{
+                //父name
+                name: 'justin'
+            },
+            components:{
+                'my-component':component
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-model-checkbox单框勾选</title>
+</head>
+<body>
+
+    <!-- checkbox单框勾选使用v-model双向绑定就是如此简单，只需要一个值为Boolean的变量 -->
+    <div id="app">
+        <label for="agree">
+            <input type="checkbox" v-model="isAgree" id="agree">同意协议
+        </label>
+
+        <p>你当前是否同意了协议：{{isAgree}}</p>
+    </div>
+    
+    <script src="../vuejs/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data:{
+                isAgree: true
+            }
+        })
+    </script>
+</body>
+</html>

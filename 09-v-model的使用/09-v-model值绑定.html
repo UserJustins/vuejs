@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-model-checkbox复选框</title>
+</head>
+<body>
+
+    <!-- 前面的复选框个数都是在页面上已经写死的，如果它需要后台动态的返回显示的怎么办？
+        比如普通用户我只能在页面看到  篮球、足球、 橄榄球 三个选项，而且是后台传递过来的
+        
+        即：页面显示的什么样的复选框是有后台传回来的数据决定的
+    -->
+    <div id="app">
+        <!-- 常见的错误写法：这样根本就找不hobby属性 -->
+        <h1>找不到属性值，因此不能正确的显示</h1>
+        <p>[Vue warn]: Property or method "hobby" is not defined on the instance but referenced during render. Make sure that this property is reactive, either in the data option, or for class-based components, by initializing the property. See: https://vuejs.org/v2/guide/reactivity.html#Declaring-Reactive-Properties.</p>
+        
+        <input type="checkbox" v-for="hobby in originHobbys" :value="hobby">{{hobby}}
+
+        <!-- 正确的写法 -->
+        <h1>正确的写法</h1>
+        <label for="" v-for="hobby in originHobbys">
+            <input type="checkbox" :value="hobby" v-model="hobbys">{{hobby}}
+        </label>
+
+        <p>后台服务器传递给前端页面：{{originHobbys}}</p>
+        <p>你当前在页面上选择的爱好有：{{hobbys}}</p>
+    </div>
+    
+    <script src="../vuejs/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data:{
+                //服务器传过来的复选框
+                originHobbys: ['篮球','足球','橄榄球','游泳','冲浪','攀岩','跳伞','大宝剑'],
+                //页面用户选择的值
+                hobbys:[]
+            }
+        })
+    </script>
+</body>
+</html>

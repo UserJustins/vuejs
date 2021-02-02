@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-model</title>
+</head>
+<body>
+<!-- 
+    1、input输入框中的内容动态复制给message属性
+        input事件
+    2、message属性值动态绑定到input输入框中
+
+    该功能还可以使用v-model指令快速完成,v-model就是这么的简单
+ -->
+    <div id="app">
+        <input type="text" v-model='message'>
+    
+        <p>你当前输入的内容是：{{message}}</p>
+        <p>message属性值也会动态的填充到输入框,可以试着改变一下！</p>
+    </div>
+    <script src="../vuejs/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data:{
+                message: 'Hello'
+            }
+        })
+    </script>
+</body>
+</html>

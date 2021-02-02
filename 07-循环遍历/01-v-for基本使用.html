@@ -6,6 +6,22 @@
     <title>Document</title>
 </head>
 <body>
-    
+<!-- 08-购物车小案例中有更多的详细使用 -->
+    <div id="app">
+        <ul>
+            <!-- 最基本的使用 -->
+            <li v-for="item in array">{{item}}</li>
+        </ul>
+    </div>
+    <script src="../vuejs/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data:{
+                array: ['A','B','C','D','E','F']
+            }
+        
+        })
+    </script>
 </body>
 </html>

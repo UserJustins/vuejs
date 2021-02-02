@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>父子组件间的相互通信</title>
+</head>
+<body>
+    
+    <div id="app">
+        <p>父组件name:{{name}}</p>
+        <p>父组件number:{{number}}</p>
+        <my_input :enterprise_name='this.name'></my_input>
+        
+    </div>
+
+    <template id="my_input">
+        <!-- id 为 myInput 的组件的模板 -->
+        <!-- 模板需要一个顶级的元素 root element -->
+        <div>
+            
+            This is a local component(my_input):<input type="text" v-model='company_name'/>
+            <p>input框输入值和 my_input 组件的 company_name attribute 进行了 bind;{{company_name}}</p>
+        </div>
+    </template>
+    <script src="../vuejs/vue.js"></script>
+    <script>
+
+        const app = new Vue({
+            el: '#app',
+            data: {
+                name : '阿里巴巴',
+                number : '30'
+            },
+            components : {
+                //注册一个标签为 my_input 的局部组件在app中
+                my_input : {
+                    template : '#my_input',
+                    props : {
+                        enterprise_name : String,
+                    },
+                    data(){
+                        return{
+                            company_name : this.enterprise_name
+                        }
+                    }
+
+                }
+                
+            }
+        })
+
+
+    </script>
+</body>
+</html>

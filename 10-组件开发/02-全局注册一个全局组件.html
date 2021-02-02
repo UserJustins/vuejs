@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.component 全局注册</title>
+</head>
+<body>
+    <h1>1、Vue.component( )表示一个全局注册的组件</h1>
+    <h1>2、一个组件的 data 选项必须是一个函数</h1>
+    <h1>3、全局组件的作用范围:</h1>
+    <h4>全局注册的组件可以用在其被注册之后的任何 (通过 new Vue) 新创建的 Vue 根实例，也包括其组件树中的所有子组件的模板中</h4>
+    <div id="components-demo">
+        <button-counter></button-counter>
+    </div>
+
+<!-- 
+        //一个组件的 data 选项必须是一个函数,这样就可以保证组件在复用时,每个组件都会各自独立维护属于自己的数据
+        //我们可以在通过 new Vue 创建的 Vue 根实例中，把这个组件作为自定义元素来使用：
+ -->
+    <script src="../vuejs/vue.js"></script>
+    <script>
+        // 定义一个标签名为 button-counter 的新组件
+        Vue.component('button-counter', {
+            data: function () {
+                return {
+                    count: 0
+                }
+            },
+            template: ` <button v-on:click="count++">
+                            You clicked me {{ count }} times.
+                        </button>`
+        })
+        //new Vue 创建的 Vue 根实例
+        new Vue({ el: '#components-demo' })
+    </script>    
+</body>
+</html>

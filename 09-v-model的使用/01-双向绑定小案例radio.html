@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<!-- 单选框互斥：name属性值相同就可以了 完成不了失败了-->
+<!-- 需求：单选框和sex属性实现双向绑定
+    1、单选框的选择联动sex属性值
+        @click? 怎么把值传给方法？
+                    @click="change('男')"？会不会有点low呢
+    2、sex属性值改变联动单选框的勾选
+        一点思路都没有呀，我压根就不知道要用input的哪个属性
+
+    算了，换个text文本框；这个最后用v-model实现好了    
+-->
+    <div id="app">
+        <input type="radio" name="sex"  @click="change('男')">男
+        <input type="radio" name="sex"  @click="change('女')">女
+
+        <br>
+        <span>你当前选择的性别是：{{sex}}</span>
+    </div>
+    <script src="../vuejs/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data:{
+                sex: '男'
+            },
+            methods:{
+                change(argument){
+                    this.sex = argument
+                }
+            }
+
+        
+        })
+    </script>
+</body>
+</html>

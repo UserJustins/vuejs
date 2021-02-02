@@ -12,11 +12,11 @@
         <button @click.stop='btnClick'>按钮</button>
         <br>
         <!-- 2、.prevent:阻止默认事件 -->
-        <!-- from表单中submit自动提交事件，.prevent可以阻止 -->
+        <!-- from表单中submit自动提交给action，但是.prevent可以阻止，并自定义提交过程 -->
         <form>
             <input type="submit" value="提交" @click.prevent.stop='manualCommit'>
         </form>
-        <!-- 3、.once:单次回调 -->
+        <!-- 3、.once:单次回调 、事件只会被执行一次-->
         <button @click.once.stop='btnClick'>button</button>
     </div>  
     

@@ -6,9 +6,10 @@
     <title>Document</title>
 </head>
 <body>
-    <!-- 上一个案例中，因为虚拟DOM的原因,两个毫不相干的input在切换的时候输入框值却还在 -->
+    <!-- 上一个案例中，因为虚拟DOM的原因,两个毫不相干根本不同的input
+        元素在切换的后上一个输入框的值却还在 -->
     <div id="app">
-        <!-- 使用属性key就可以解决 -->
+        <!-- 使用属性key就可以解决 ，保证属性key不同就欧克-->
         <span v-if='show'>
             <label for="username">用户登录</label>
             <input type="text" id="username" placeholder="用户名" key='username'>

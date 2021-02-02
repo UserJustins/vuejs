@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .active{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <!-- 分析：
+                class的属性值是动态的，之前使用 active:isActive=true,
+                很明显是个死的，因此需要表达式来判断，那和谁进行怎样的判断呢？
+                我们需要每一列变化更何况现在是在遍历，第一个想到的就是下标了；
+                下标有了我还需要另一个变量来与之比较，那么顺手就是一个初始值为
+                0的 变量，刚好默认选中第一个。
+            -->
+            <li v-for="(item,index) in arrays" 
+                :class='{active:isActive === index}'
+                @click='right(index)'>
+                {{item}}
+            </li>
+        </ul>
+    </div>
+    <script src="../vuejs/vue.js"></script>
+    <script>
+
+        new Vue({
+            el: '#app',
+            data:{
+                arrays: ['A','B','C','D','E','F'],
+                isActive: 0
+            },
+            methods:{
+                right(index){
+                    this.isActive = index
+                }
+            }
+        })
+    </script>
+</body>
+</html>

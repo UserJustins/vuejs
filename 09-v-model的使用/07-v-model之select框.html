@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-model-select</title>
+</head>
+<body>
+
+    
+    <div id="app">
+        <!-- 单选 -->
+        <h1>select 单选</h1>
+        <select v-model="type">
+            <option  value="身份证">身份证</option>
+            <option  value="户口本">户口本</option>
+            <option  value="驾驶证">驾驶证</option>
+            <option  value="暂住证">暂住证</option>
+            <option  value="通行证">通行证</option>
+        </select>
+       <p>你当前选择了下拉框中的这个值：{{type}}</p>
+
+        <!-- 多选 
+            1、必须使用multiple属性
+            2、数组类型的数据
+        -->
+        <h1>select 多选</h1>
+        <select v-model="types" multiple>
+            <option  value="身份证">身份证</option>
+            <option  value="户口本">户口本</option>
+            <option  value="驾驶证">驾驶证</option>
+            <option  value="暂住证">暂住证</option>
+            <option  value="通行证">通行证</option>
+        </select>
+        <p>你当前选择了下拉框中的这个值：{{types}}</p>
+    </div>
+    
+    <script src="../vuejs/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data:{
+                type: '通行证',
+                types:['通行证','驾驶证']
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- 子传父一般发生在子组件的各种事件上，子组件需要将参数传给父组件让其向后台请求数据 
+    在此基础上进行子传父
+    <body>
+    
+    <div id="app">
+        姓名是：{{name}} <br>
+        性别是：{{sex}}
+        <my-com></my-com>
+    </div>
+
+    <template id="com">
+        <div>
+            <span>年龄是：{{age}}</span>
+        </div>
+    </template>
+
+    <script src="../vuejs/vue.js"></script>
+    <script>
+
+        var component = {
+            template: '#com',
+            data(){
+                return{
+                    age: 18,
+                }
+            }
+        }
+
+        new Vue({
+            el: '#app',
+            data:{
+                name: 'justin',
+                sex: 'male'
+            },
+            components:{
+                'my-com':component,
+            }
+        })
+    </script>
+</body>
+-->
+<body>
+    <!-- 
+        1、想象子组件中某个元素发生事件自个向后台发送请求
+        2、但是子组件自个发请求是没有资格的，得发射出去找它爸帮忙(如何发射：this.$emit('自定义事件名'))
+        3、子组件发射的自定义事件得让它爸一直监听
+     -->
+    <div id="app">
+    
+        <!-- 自定义事件来传递数据 -->
+        <my-com @custom-click='monitor'></my-com>
+        {{obj}}
+    </div>
+
+    <template id="com">
+        <div>
+            <button v-for="category in categories" @click="btnClick(category)">{{category.name}}</button>
+        </div>
+    </template>
+
+    <script src="../vuejs/vue.js"></script>
+    <script>
+
+        var component = {
+            template: '#com',
+            data(){
+                return{
+                    categories:[
+                        {id:1,name:'生活用品'},
+                        {id:2,name:'户外运动'},
+                        {id:3,name:'家用电器'},
+                    ] 
+                }
+            },
+            methods:{
+                btnClick(arg){
+                    //将参数传递给组件的自定义事件
+                    this.$emit('custom-click',arg)
+                    
+                }
+            }
+        }
+
+        new Vue({
+            el: '#app',
+            data:{
+                obj: null
+            },
+            components:{
+                'my-com':component
+            },
+            methods:{
+                monitor(obj){
+                    
+                    this.obj = obj
+                }
+            }
+        })
+    </script>
+</body>
+</html>

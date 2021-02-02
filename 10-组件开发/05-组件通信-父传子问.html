@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="component">
+        <h1>{{hello}}</h1>
+        <!-- 3、使用组件 -->
+        <my-component></my-component>
+    </div>
+
+    <template id="tempA">
+        <div>
+            <span>我是组件模板tempA</span>
+        </div>
+    </template>
+
+
+    <script src="../vuejs/vue.js"></script>
+    <script>
+        //1、定义一个组件
+        var componentA = {
+            template : '#tempA',
+            data(){
+                return {
+                    count:1,
+                    helloChlidren: ''//? 怎么传过来
+                }
+            }
+        }
+
+
+        new Vue({
+            el: '#component',
+            data:{
+                //将hello的值传给组件componentA中的helloChlidren属性
+                hello: 'hello world'
+            },
+            //2、注册一个组件
+            components: {
+                'my-component': componentA
+            }
+        })
+    </script>
+</body>
+</html>

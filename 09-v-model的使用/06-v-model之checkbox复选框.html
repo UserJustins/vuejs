@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-model-checkbox复选框</title>
+</head>
+<body>
+
+    <!-- checkbox复选框使用v-model双向绑定只需要一个值为数组的变量 -->
+    <div id="app">
+        
+        <input type="checkbox" v-model="hobby" value="篮球">篮球
+        <input type="checkbox" v-model="hobby" value="足球">足球
+        <input type="checkbox" v-model="hobby" value="橄榄球">橄榄球
+       
+
+        <p>你当前勾选的兴趣爱好有：{{hobby}}</p>
+    </div>
+    
+    <script src="../vuejs/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data:{
+                hobby: ['篮球']
+            }
+        })
+    </script>
+</body>
+</html>

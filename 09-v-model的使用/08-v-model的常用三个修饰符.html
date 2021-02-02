@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-model</title>
+</head>
+<body>
+<!-- 
+    1、lazy：文本输入框的值一有改动，绑定的属性就立即响应变化，这样太过频繁
+    如果我们只想在输入框失去焦点或者用户回车后再响应到绑定的属性上，就可以
+    使用lazy修饰符
+    2、trim：去空格
+    3、number：可以将输入框的内容转换成数组类型
+ -->
+    <div id="app">
+        <!-- lazy -->
+        <h1>lazy修饰符</h1>
+        <input type="text" v-model.lazy='lazy'>
+        <p>你当前输入的内容是：{{lazy}}</p>
+
+        <p>message属性值也会动态的填充到输入框,可以试着改变一下！</p>
+        <!-- trim -->
+        <h1>trim修饰符</h1>
+        <input type="text" v-model.trim='trim'>
+        <p>初始值是存在空格的，是不会去掉的；当前文本框的内容是：{{trim}}</p>
+        <!-- number -->
+        <h1>number修饰符,保证输入的数字是number类型</h1>
+        <input type="number" v-model.number='number'>
+        <p>可以试着在控制台使用typeof看一下</p>
+        
+    </div>
+    <script src="../vuejs/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data:{
+                lazy: 'Hello',
+                trim: '               World   ',
+                number: 123
+            }
+        })
+    </script>
+</body>
+</html>

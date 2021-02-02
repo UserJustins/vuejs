@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模板分离</title>
+</head>
+<body>
+
+    <div id="components-demo">
+        <button-counter></button-counter>
+    </div>
+
+    <!-- 通过id属性绑定 -->
+    <template id="my-button">
+        <button v-on:click="count++">
+            You clicked me {{ count }} times.
+        </button>
+    </template>
+
+    <script src="../vuejs/vue.js"></script>
+    <script>
+       
+        var componentA={
+            data: function () {
+                return {
+                    count: 0
+                }
+            },
+        template: '#my-button'
+        }
+
+        new Vue({ 
+            el: '#components-demo',
+            components:{
+                'button-counter': componentA
+            }
+            
+        })
+    </script>    
+</body>
+</html>
