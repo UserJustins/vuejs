@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>组件通信子传父</title>
+  <script src="../vuejs/vue.js"></script>
+</head>
+<!-- 把组件中的 company_id 的值传递给 Vue 实例中 
+  父传子是 props 属性之间的动态绑定，而子传父就真真切切的是子组件触发事件，
+  子组件事件绑定的方法中将值发送给父组件中的方法中
+  1、子组件事件触发函数，函数中将值使用 this.$emit('子组件自定义的事件名'，值)
+  2、组件标签中将子组件的方法和父组件的方法联系起来 @子组件自定义事件名=‘父组件中的方法’
+  3、父组件中的方法将传递的值赋值给对应的属性
+-->
+<body>
+  <div id ="app">
+    公司名称：<input type="text" :value='company_name'> 
+    公司证件号：<input type="text" v-model='company_id' placeholder="点击按钮试试">
+    <cpn @custom-click='monitor'></cpn>
+  </div>
+
+  <template id="cpn">
+    <div>
+      <slot name='btn'>
+        <button slot="btn" @click='send'>试试就试试</button>
+      </slot>
+    </div>
+  
+  </template>
+  <script>
+    const app = new Vue({
+      el : "#app",
+      data : {
+        company_name : "alibaba",
+        company_id : ""
+      },
+      methods : {
+        monitor(arg){
+          console.log(arg)
+          this.company_id = arg 
+          console.log(this.company_id)
+        }
+      },
+      components : {
+        cpn : {
+          template : "#cpn",
+          data(){
+            return{
+              company_id : "NO1"
+            }
+          },
+          methods : {
+            send(){
+             
+              this.$emit('custom-click',this.company_id)
+
+            }
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>

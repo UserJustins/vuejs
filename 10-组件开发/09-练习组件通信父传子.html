@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../vuejs/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    {{hello}} <span>from Vue</span>
+    <cpn :children_param="param"></cpn>
+  </div>
+
+  <!-- 组件 cpn 的模板 -->
+  <template id="cpn">
+    <div>
+      {{children}} <span>from components</span>
+      <h2>{{children_param}} from components</h2>
+
+    </div>
+  </template>
+  <!-- 站在 java 的角度进行的类比
+  Vue中有个属性param的值需要传递给 components 的cpn组件，可以认为需要将实参param传递给
+  形参 children_param 
+    1、在Vue的作用域中使用动态的属性绑定将 param 的值传递给组件的 children_param属性
+      联想到 children_param 可以是 java方法的形参
+    2、java 中 children_param 形参在定义的时候是需要进行类型定义的
+    3、就是使用形参children_param 
+-->
+  <!-- 在实际的开发中，想传递的值可能会很多，这样一个个的动态值绑定肯定是不明智的，我想语言的
+设计者的大佬们也能想到这个问题；
+  怎么解决呢？大胆的猜想可能会像java中的封装思想，可是这个是vue我觉得肯定不会像java封装那么
+  复杂，那就往简单了想：是不是将组件的整个对象进行了传递
+-->
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        hello: "world",
+        param: "vue instance ‘param’ attribute value"
+      },
+      components: {
+        cpn: {
+          template: "#cpn",
+          data() {
+            return {
+              children: "children_world"
+            }
+          },
+          props: {
+            children_param: String
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

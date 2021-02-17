@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../vuejs/vue.js"></script>
+</head>
+
+<!-- 一个组件可以有多个子组件
+  $children 需要借助下标来获取唯一的子组件对象，局限性就可想而知了
+  $refs 同样获取也是多个子组件，但它可以应用子组件的唯一标识来精确定位子组件
+-->
+<body>
+  <div id ="app">
+    <button @click='getChildrens'>click me</button>
+    <children-one ref='one'></children-one>
+    <children-two></children-two>
+  </div>
+  <template id="one">
+    <div>{{one}}</div>
+  </template>
+  <template id="two">
+    <div>{{two}}</div>
+  </template>
+  <script>
+    const app = new Vue({
+      el : '#app',
+      methods : {
+        getChildrens(){
+          // 多个组件自然是数组,可以使用下标获取唯一的组件对象
+          // this.$children获取的是所有的子组件,可以使用this.$children[index]得到唯一
+          console.log(this.$children[1].two)
+          console.log(this.$refs.one.one)
+        }
+      },
+      components : {
+        'children-one' : {
+          template : '#one',
+          data(){
+            return{
+              one : 'one'
+            }
+          }
+        },
+        'children-two' : {
+          template : '#two',
+          data(){
+            return{
+              two : 'two'
+            }
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>

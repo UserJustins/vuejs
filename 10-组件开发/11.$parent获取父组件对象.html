@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../vuejs/vue.js"></script>
+</head>
+
+<body>
+  <div id ="app">
+    <children-one></children-one>
+  </div>
+
+  <template id="children-one">
+    <div>
+      {{children_param}}
+      <button @click='getParentObject'>click me</button>
+    </div> 
+  </template>
+  <script>
+    const app = new Vue({
+      el : "#app",
+      components : {
+        'children-one' : {
+          template : '#children-one',
+          data(){
+            return{
+              children_param : 'world'
+            }
+          },
+          methods : {
+            getParentObject(){
+              console.log(this.$parent)
+            }
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../vuejs/vue.js"></script>
+</head>
+<!-- 插槽 增强了组件的扩展性 -->
+<body>
+  <div id ="app">
+    <cpn>
+      <!-- 插槽的简单使用，填充和替换插槽的默认设置 -->
+      <span>Hello World</span>
+    </cpn>
+    
+    <cpn>插槽是否可以引入组件？</cpn>
+    <!-- 尝试插槽中能否引入组件,需要注意的就是插槽的作用域问题 -->
+    <cpn><test></test></cpn>
+  </div>
+
+  <template id="cpn">
+    <div>
+      <!-- 使用 slot 标签声明一个插槽 -->
+      <!-- 还可以对插槽进行默认的设置 -->
+      <slot><h1>{{param}}</h1></slot>
+    </div>
+  </template>
+  <template id="test">
+    <div>测试插槽是否可以引入组件</div>
+  </template>
+  <script>
+    const app = new Vue({
+      el : "#app",
+      components : {
+        cpn : {
+          template : "#cpn",
+          data(){
+            return{
+              param : 1
+            }
+          }
+        },
+        test : {
+          template : "#test"
+        }
+      }
+    })
+  </script>
+</body>
+</html>
