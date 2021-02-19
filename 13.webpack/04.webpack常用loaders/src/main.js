@@ -8,3 +8,19 @@ import {name,age} from './js/info.js'
 console.log(name+' and '+age)
 //引用css文件
 require('./css/normal.css')
+
+
+//引入vue
+import Vue from 'vue'
+//引入组件
+import App from './vue/App.vue'
+
+new Vue({
+  el : "#app",
+  //对App组件进行注册
+  components:{
+    App
+  },
+  // 在index.html页面 id=‘app’替换该标签<app/>
+  template : '<app></app>',
+})

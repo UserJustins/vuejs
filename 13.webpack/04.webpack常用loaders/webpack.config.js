@@ -5,12 +5,22 @@ module.exports = {
       filename: "bundle.js",
       publicPath : "dist/"
   },
+  resolve:{
+    alias:{
+      'vue$' : 'vue/dist/vue.esm.js'
+    }
+  },
   module: {
     rules: [
       // 处理css的loader
       {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
+      },
+      // 处理vue文件的loader
+      {
+        test: /\.vue$/,
+        use: ["vue-loader"],
       },
       // 处理将图片资源转成 data url 进行处理
       {
